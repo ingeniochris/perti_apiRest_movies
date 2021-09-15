@@ -43,6 +43,7 @@ app.use((req, res, next) => {
   next();
 }); // Routes
 
+app.use("/", _indexRoutes.startRoutes);
 app.use("/api/auth", _indexRoutes.authRoutes);
 app.use("/api/user", _indexRoutes.userRoutes);
 app.use("/api/movies", _indexRoutes.movieRoutes); // error middleware

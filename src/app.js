@@ -10,7 +10,7 @@ import cors from 'cors';
 import {conn} from './config/database'
 
 //import Routes
-import {authRoutes, userRoutes, movieRoutes} from './routes/index.routes.js'
+import {startRoutes, authRoutes, userRoutes, movieRoutes} from './routes/index.routes.js'
 
 const app = express();
 conn();
@@ -36,6 +36,7 @@ app.use((req, res, next) => {
 });
 
 // Routes
+app.use("/", startRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/movies", movieRoutes)

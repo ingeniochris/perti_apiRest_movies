@@ -21,11 +21,19 @@ Object.defineProperty(exports, "movieRoutes", {
     return _movie.default;
   }
 });
+Object.defineProperty(exports, "startRoutes", {
+  enumerable: true,
+  get: function get() {
+    return _start.default;
+  }
+});
 
 var _user = _interopRequireDefault(require("./user.routes"));
 
 var _auth = _interopRequireDefault(require("./auth.routes"));
 
 var _movie = _interopRequireDefault(require("./movie.routes"));
+
+var _start = _interopRequireDefault(require("./start.routes"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
