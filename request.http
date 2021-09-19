@@ -1,5 +1,10 @@
+### variables
+@baseUrl = https://app-95dd171d-8b3f-4531-acfa-146935c2e464.cleverapps.io/api
 
-POST http://localhost:8080/api/user/login 
+@token = 
+
+### Login
+POST {{baseUrl}}/user/login 
 Content-Type: application/json
 
 {
@@ -7,8 +12,8 @@ Content-Type: application/json
     "password": "123456"
 }
 
-###
-POST http://localhost:8080/api/auth/signup HTTP/1.1
+### Sign UP
+POST {{baseUrl}}/auth/signup HTTP/1.1
 Content-Type: application/json
 
 {
@@ -21,9 +26,9 @@ Content-Type: application/json
 }
 
 ### Add movie
-POST http://localhost:8080/api/movies/add HTTP/1.1
+POST {{baseUrl}}/movies/add HTTP/1.1
 Content-Type: application/json
-x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTYzMjAyNDI2MywiZXhwIjoxNjMyMDI3ODYzfQ.39i4jbcBTX-DXgyIwySvn8az9GMVR0es4niRdlamNKU
+x-auth-token: {{token}}
 
 {
     "title": "batman",
@@ -32,19 +37,19 @@ x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzd29yZCI6IjEyMzQ1NiIsI
 }
 
 ### Search all users
-GET http://localhost:8080/api/user
+GET {{baseUrl}}/user
 Content-Type: application/json
-x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTYzMjAxNDg2MSwiZXhwIjoxNjMyMDE4NDYxfQ.AN3y47kd4ZRz-fgK8B2GjF1yVO7bTlLx5AvDBWahPPo
+x-auth-token: {{token}}
 
 ### Search title movie
-GET http://localhost:8080/api/movies/?title=batman forever
+GET {{baseUrl}}/movies/?title=batman forever
 Content-Type: application/json
-x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTYzMjAyNDI2MywiZXhwIjoxNjMyMDI3ODYzfQ.39i4jbcBTX-DXgyIwySvn8az9GMVR0es4niRdlamNKU
+x-auth-token: {{token}}
 
 ### Update Movie
-PUT http://localhost:8080/api/movies/update/6146b6e320024f6ab3d0745c
+PUT {{baseUrl}}/movies/update/6146b6e320024f6ab3d0745c
 Content-Type: application/json
-x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTYzMjAyNDI2MywiZXhwIjoxNjMyMDI3ODYzfQ.39i4jbcBTX-DXgyIwySvn8az9GMVR0es4niRdlamNKU
+x-auth-token: {{token}}
 
 {
     "title": "batman forever",
@@ -53,6 +58,6 @@ x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzd29yZCI6IjEyMzQ1NiIsI
 }
 
 ### Delete Movie
-DELETE http://localhost:8080/api/movies/delete/6146691d56c0a30c2f255fab
+DELETE {{baseUrl}}/movies/delete/6146691d56c0a30c2f255fab
 Content-Type: application/json
-x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTYzMjAyNDI2MywiZXhwIjoxNjMyMDI3ODYzfQ.39i4jbcBTX-DXgyIwySvn8az9GMVR0es4niRdlamNKU
+x-auth-token: {{token}}
