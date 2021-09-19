@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -20,8 +20,8 @@ var _ValidationInputs = require("../middleware/ValidationInputs");
 //validation inputs AuthMiddleware
 var router = (0, _express.Router)(); // route api/user/
 
-router.post('/login', _ValidationInputs.validationLogin, _authCtrl.Authentic); // Route protected api/user/ 
+router.post("/login", _ValidationInputs.validationLogin, _authCtrl.Authentic); // Route protected api/user/
 
-router.get('/', _Auth.AuthMiddleware, _usersCtrl.getUsers);
+router.get("/", _Auth.AuthMiddleware, _usersCtrl.getUsers);
 var _default = router;
 exports.default = _default;

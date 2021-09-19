@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -97,7 +97,6 @@ var Authentic = /*#__PURE__*/function () {
         });
       }
 
-      ;
       var {
         accountVerifyToken
       } = haveUser;
@@ -109,7 +108,6 @@ var Authentic = /*#__PURE__*/function () {
         });
       }
 
-      ;
       var token = yield (0, _Users.verifyUpdateToken)(_objectSpread(_objectSpread({}, req.body), {}, {
         accountVerifyToken
       }));
@@ -118,8 +116,6 @@ var Authentic = /*#__PURE__*/function () {
       console.log(error);
       res.status(400).send("Have an error");
     }
-
-    ;
   });
 
   return function Authentic(_x4, _x5, _x6) {

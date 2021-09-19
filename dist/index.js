@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var _app = _interopRequireDefault(require("./app"));
 
@@ -14,7 +14,7 @@ var Main = /*#__PURE__*/function () {
       yield app.listen(app.get("port"));
       console.log("\n      ################################################\n      \uD83D\uDEE1\uFE0F  Server running on http://localhost:".concat(app.get("port"), " \uD83D\uDEE1\uFE0F\n      ################################################\n    "));
     } catch (err) {
-      console.log(err);
+      console.error(err);
       process.exit(1);
     }
   });

@@ -14,17 +14,20 @@ var movieSchema = new Schema({
   title: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
+    unique: true
   },
   year: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
+    unique: false
   },
   runtime: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
+    unique: false
   },
   user: {
     type: Schema.Types.ObjectId,
@@ -33,6 +36,6 @@ var movieSchema = new Schema({
   }
 });
 
-var _default = _mongoose.default.model('Movie', movieSchema);
+var _default = _mongoose.default.model("Movie", movieSchema);
 
 exports.default = _default;

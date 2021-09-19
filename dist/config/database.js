@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -22,7 +22,7 @@ var conn = /*#__PURE__*/function () {
         useNewUrlParser: true,
         useUnifiedTopology: true
       });
-      if (verifyConn) return console.log('MongoDB is Connected');
+      if (verifyConn) return console.log("MongoDB is Connected");
     } catch (error) {
       handleError(error);
     }

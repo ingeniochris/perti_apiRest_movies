@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -25,7 +25,7 @@ var getUsers = /*#__PURE__*/function () {
     } catch (error) {
       console.log(error);
       res.status(500).json({
-        msg: 'Have an error'
+        msg: "Have an error"
       });
     }
   });

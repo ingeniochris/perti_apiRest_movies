@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -17,11 +17,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var AuthMiddleware = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator(function* (req, res, next) {
-    var token = req.header('x-auth-token');
+    var token = req.header("x-auth-token");
 
     if (!token) {
       return res.status(401).json({
-        msg: 'No Token, invalid permission'
+        msg: "No Token, invalid permission"
       });
     }
 
@@ -33,7 +33,7 @@ var AuthMiddleware = /*#__PURE__*/function () {
         }
       });
       if (!verifyAccount) res.status(403).json({
-        msg: 'The token in the url is expired, don´t try to fool me'
+        msg: "The token in the url is expired, don´t try to fool me"
       });
 
       var cifrado = _jsonwebtoken.default.verify(token, process.env.SECRETA);
@@ -42,7 +42,7 @@ var AuthMiddleware = /*#__PURE__*/function () {
       next();
     } catch (error) {
       res.status(401).json({
-        msg: 'Token no valid !!'
+        msg: "Token no valid !!"
       });
     }
   });

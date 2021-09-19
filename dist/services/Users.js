@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -19,8 +19,58 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+/**
+ * Function that use bcrypt for encryption
+ * @param {String} password
+ * @returns passwordEncrypted
+ */
+var passwordEncryp = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator(function* (password) {
+    var salt = yield _bcryptjs.default.genSalt(10);
+    var passEncrypted = yield _bcryptjs.default.hash(password, salt);
+    return passEncrypted;
+  });
+
+  return function passwordEncryp(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+/**
+ * Function that generate jwt with password payload
+ * @param {String} password
+ * @returns token jwt
+ */
+
+
+var generateToken = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator(function* (password) {
+    var payload = {
+      password
+    };
+    var token = yield _jsonwebtoken.default.sign(payload, process.env.SECRETA, {
+      expiresIn: 3600
+    });
+    return token;
+  });
+
+  return function generateToken(_x2) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+/**
+ *
+ * @param {String} email
+ * @param {String} firstName
+ * @param {String} lastName
+ * @param {String} password
+ * @param {String} confirmPassword
+ * @param {String} role ROLE_USER or ROLE_ADMIN
+ * @returns {Object} User
+ */
+
+
 var createUser = /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator(function* (_ref) {
+  var _ref4 = _asyncToGenerator(function* (_ref3) {
     var {
       email,
       firstName,
@@ -28,21 +78,15 @@ var createUser = /*#__PURE__*/function () {
       password,
       confirmPassword,
       role
-    } = _ref;
-    var salt = yield _bcryptjs.default.genSalt(10);
-    var passwordEncryp = yield _bcryptjs.default.hash(password, salt);
-    var confirmPasswordEncryp = yield _bcryptjs.default.hash(confirmPassword, salt);
-    var payload = {
-      password
-    };
-    var token = yield _jsonwebtoken.default.sign(payload, process.env.SECRETA, {
-      expiresIn: 3600
-    });
+    } = _ref3;
+    var passEncrypted = yield passwordEncryp(password);
+    var confirmPassEncrypted = yield passwordEncryp(confirmPassword);
+    var token = yield generateToken(password);
     var account = new _Account.default({
       role,
       email,
-      password: passwordEncryp,
-      confirmPassword: confirmPasswordEncryp,
+      password: passEncrypted,
+      confirmPassword: confirmPassEncrypted,
       accountVerifyToken: token,
       accountVerifyTokenExpiration: Date.now() + 3600000
     });
@@ -55,25 +99,27 @@ var createUser = /*#__PURE__*/function () {
     return newUser;
   });
 
-  return function createUser(_x) {
-    return _ref2.apply(this, arguments);
+  return function createUser(_x3) {
+    return _ref4.apply(this, arguments);
   };
 }();
+/**
+ * Function that verify and update token in DB
+ * @param {String} password
+ * @param {String} token
+ * @returns token
+ */
+
 
 exports.createUser = createUser;
 
 var verifyUpdateToken = /*#__PURE__*/function () {
-  var _ref4 = _asyncToGenerator(function* (_ref3) {
+  var _ref6 = _asyncToGenerator(function* (_ref5) {
     var {
       password,
       accountVerifyToken
-    } = _ref3;
-    var payload = {
-      password
-    };
-    var token = yield _jsonwebtoken.default.sign(payload, process.env.SECRETA, {
-      expiresIn: 3600
-    });
+    } = _ref5;
+    var token = yield generateToken(password);
     var queryUpdate = {
       accountVerifyToken: accountVerifyToken
     };
@@ -86,8 +132,8 @@ var verifyUpdateToken = /*#__PURE__*/function () {
     return token;
   });
 
-  return function verifyUpdateToken(_x2) {
-    return _ref4.apply(this, arguments);
+  return function verifyUpdateToken(_x4) {
+    return _ref6.apply(this, arguments);
   };
 }();
 

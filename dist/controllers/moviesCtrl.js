@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.addMovie = exports.getMovies = void 0;
+exports.deleteMovie = exports.updateMovie = exports.addMovie = exports.searchMovies = void 0;
 
 var _expressValidator = require("express-validator");
 
@@ -23,10 +23,10 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var getMovies = /*#__PURE__*/function () {
+var searchMovies = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator(function* (req, res, next) {
     try {
-      var allMov = yield (0, _Movies.allMoviesTitle)(req.query);
+      var allMov = yield (0, _Movies.titleMovieService)(req.query);
       if (!allMov) return res.json({
         msg: "Title don´t match in Movies"
       });
@@ -36,16 +36,16 @@ var getMovies = /*#__PURE__*/function () {
     }
   });
 
-  return function getMovies(_x, _x2, _x3) {
+  return function searchMovies(_x, _x2, _x3) {
     return _ref.apply(this, arguments);
   };
 }();
 
-exports.getMovies = getMovies;
+exports.searchMovies = searchMovies;
 
 var addMovie = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator(function* (req, res, next) {
-    var token = req.header('x-auth-token');
+    var token = req.header("x-auth-token");
     var errores = (0, _expressValidator.validationResult)(req);
 
     if (!errores.isEmpty()) {
@@ -55,7 +55,7 @@ var addMovie = /*#__PURE__*/function () {
     }
 
     try {
-      var movie = yield (0, _Movies.createMovie)(_objectSpread(_objectSpread({}, req.body), {}, {
+      var movie = yield (0, _Movies.createMovieService)(_objectSpread(_objectSpread({}, req.body), {}, {
         token
       }));
       return res.status(201).json(movie);
@@ -70,3 +70,49 @@ var addMovie = /*#__PURE__*/function () {
 }();
 
 exports.addMovie = addMovie;
+
+var updateMovie = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator(function* (req, res, next) {
+    var token = req.header("x-auth-token");
+    var errores = (0, _expressValidator.validationResult)(req);
+
+    if (!errores.isEmpty()) {
+      return res.status(400).json({
+        errores: errores.array()
+      });
+    }
+
+    try {
+      var movie = yield (0, _Movies.updateMovieService)(req.params.id, _objectSpread(_objectSpread({}, req.body), {}, {
+        token
+      }));
+      return res.status(201).json(movie);
+    } catch (error) {
+      console.error(error), next();
+    }
+  });
+
+  return function updateMovie(_x7, _x8, _x9) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+
+exports.updateMovie = updateMovie;
+
+var deleteMovie = /*#__PURE__*/function () {
+  var _ref4 = _asyncToGenerator(function* (req, res, next) {
+    try {
+      var deleteMov = yield (0, _Movies.deleteMovieService)(req.params.id);
+      return res.status(201).json(deleteMov);
+    } catch (error) {
+      console.error(error);
+      next();
+    }
+  });
+
+  return function deleteMovie(_x10, _x11, _x12) {
+    return _ref4.apply(this, arguments);
+  };
+}();
+
+exports.deleteMovie = deleteMovie;

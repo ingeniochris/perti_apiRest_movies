@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -26,7 +26,7 @@ _dotenv.default.config();
 var app = (0, _express.default)();
 (0, _database.conn)(); //config port
 
-app.set('port', process.env.PORT); //middleware
+app.set("port", process.env.PORT); //middleware
 
 app.use((0, _helmet.default)());
 app.use((0, _cors.default)());
@@ -35,13 +35,16 @@ app.use(_express.default.urlencoded({
   extended: false
 }));
 app.use(_express.default.json()); // set headers
-
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, text/plain");
-  next();
-}); // Routes
+// app.use((req, res, next) => {
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   res.setHeader(
+//     "Access-Control-Allow-Methods",
+//     "GET, POST, PUT, PATCH, DELETE"
+//   );
+//   res.setHeader("Access-Control-Allow-Headers", "Content-Type, application/json");
+//   next();
+// });
+// Routes
 
 app.use("/", _indexRoutes.startRoutes);
 app.use("/api/auth", _indexRoutes.authRoutes);
@@ -59,7 +62,7 @@ app.use((error, req, res, next) => {
   }
 
   res.status(statusCode).json({
-    message: message,
+    msg: message,
     errors: errorsPresent
   });
 });

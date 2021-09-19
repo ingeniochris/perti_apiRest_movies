@@ -1,9 +1,8 @@
+"use strict";
 
-'use strict';
+import app from "./app";
 
-import app from './app';
-
-const Main = async app => {
+const Main = async (app) => {
   try {
     await app.listen(app.get("port"));
     console.log(`
@@ -12,10 +11,9 @@ const Main = async app => {
       ################################################
     `);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     process.exit(1);
   }
-}
+};
 
 Main(app);
-
