@@ -4,6 +4,7 @@ import { Router } from "express";
 
 //middleware
 import { AuthMiddleware } from "../middleware/Auth";
+import { isAdmin } from "../middleware/isAdmin";
 
 import {
   searchMovies,
@@ -23,17 +24,17 @@ const router = Router();
 router.get("/", AuthMiddleware, searchMovies);
 
 //Route protected api/movies
-router.post("/add", AuthMiddleware, validationMovie, addMovie);
+router.post("/add",[ AuthMiddleware, validationMovie], addMovie);
 
 //Route protected api/movies
 router.put(
   "/update/:id",
-  AuthMiddleware,
+  [AuthMiddleware,
   validationParams,
-  validationMovie,
+  validationMovie],
   updateMovie
 );
 
-router.delete("/delete/:id", AuthMiddleware, validationParams, deleteMovie);
+router.delete("/delete/:id", [AuthMiddleware,isAdmin], deleteMovie);
 
 export default router;

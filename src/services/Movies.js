@@ -16,8 +16,9 @@ const normalizeWord = (title) => {
  * @param {Movie} title
  * @returns movie
  */
-export const titleMovieService = async (title) => {
-  const movie = await Movie.findOne(title);
+export const titleMovieService = async (titleUpdate) => {
+  console.log(titleUpdate.title)
+  const movie = await Movie.find({title:{$in: titleUpdate.title}});
   return movie;
 };
 
@@ -71,7 +72,9 @@ export const updateMovieService = async (
         user: await searchUser.save(),
       },
     });
+    if(!searchMovieId) return {msg:'the movie has not been found'}
     return { msg: "the movie has been updated successfully" };
+
   } catch (error) {
     console.error(error);
     return { msg: "Movie don´t updating" };

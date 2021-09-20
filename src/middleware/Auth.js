@@ -5,6 +5,7 @@ import Account from "../models/Account";
 
 export const AuthMiddleware = async (req, res, next) => {
   const token = req.header("x-auth-token");
+  req.token = token;
   if (!token) {
     return res.status(401).json({ msg: "No Token, invalid permission" });
   }

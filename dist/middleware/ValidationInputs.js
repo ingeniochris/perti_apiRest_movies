@@ -11,7 +11,11 @@ var validationCreateUser = [(0, _expressValidator.check)("email", "Add valid ema
   min: 6
 }), (0, _expressValidator.check)("confirmPassword", "The Confirm password is min 6 characters").isLength({
   min: 6
-}), (0, _expressValidator.check)("role", "Add role , example.- ROLE_USER or ROLE_ADMIN ").not().isEmpty().toUpperCase(), (0, _expressValidator.body)("confirmPassword").custom((value, _ref) => {
+}), // check("role", "Add role , example.- ROLE_USER or ROLE_ADMIN ")
+//   .not()
+//   .isEmpty()
+//   .toUpperCase(),
+(0, _expressValidator.body)("confirmPassword").custom((value, _ref) => {
   var {
     req
   } = _ref;

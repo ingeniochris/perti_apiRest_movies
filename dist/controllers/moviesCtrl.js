@@ -25,6 +25,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var searchMovies = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator(function* (req, res, next) {
+    console.log(req.query);
+
     try {
       var allMov = yield (0, _Movies.titleMovieService)(req.query);
       if (!allMov) return res.json({

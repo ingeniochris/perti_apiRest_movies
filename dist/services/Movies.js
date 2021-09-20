@@ -31,8 +31,13 @@ var normalizeWord = title => {
 
 
 var titleMovieService = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator(function* (title) {
-    var movie = yield _Movie.default.findOne(title);
+  var _ref = _asyncToGenerator(function* (titleUpdate) {
+    console.log(titleUpdate.title);
+    var movie = yield _Movie.default.find({
+      title: {
+        $in: titleUpdate.title
+      }
+    });
     return movie;
   });
 
@@ -123,6 +128,9 @@ var updateMovieService = /*#__PURE__*/function () {
           user: yield searchUser.save()
         }
       });
+      if (!searchMovieId) return {
+        msg: 'the movie has not been found'
+      };
       return {
         msg: "the movie has been updated successfully"
       };

@@ -18,9 +18,9 @@ var router = (0, _express.Router)(); //Route protected api/movies
 
 router.get("/", _Auth.AuthMiddleware, _moviesCtrl.searchMovies); //Route protected api/movies
 
-router.post("/add", _Auth.AuthMiddleware, _ValidationInputs.validationMovie, _moviesCtrl.addMovie); //Route protected api/movies
+router.post("/add", [_Auth.AuthMiddleware, _ValidationInputs.validationMovie], _moviesCtrl.addMovie); //Route protected api/movies
 
-router.put("/update/:id", _Auth.AuthMiddleware, _ValidationInputs.validationParams, _ValidationInputs.validationMovie, _moviesCtrl.updateMovie);
-router.delete("/delete/:id", _Auth.AuthMiddleware, _ValidationInputs.validationParams, _moviesCtrl.deleteMovie);
+router.put("/update/:id", [_Auth.AuthMiddleware, _ValidationInputs.validationParams, _ValidationInputs.validationMovie], _moviesCtrl.updateMovie);
+router.delete("/delete/:id", [_Auth.AuthMiddleware, _ValidationInputs.validationParams], _moviesCtrl.deleteMovie);
 var _default = router;
 exports.default = _default;

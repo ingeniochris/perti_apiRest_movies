@@ -10,10 +10,10 @@ export const validationCreateUser = [
   check("confirmPassword", "The Confirm password is min 6 characters").isLength(
     { min: 6 }
   ),
-  check("role", "Add role , example.- ROLE_USER or ROLE_ADMIN ")
-    .not()
-    .isEmpty()
-    .toUpperCase(),
+  // check("role", "Add role , example.- ROLE_USER or ROLE_ADMIN ")
+  //   .not()
+  //   .isEmpty()
+  //   .toUpperCase(),
   body("confirmPassword").custom((value, { req }) => {
     if (value !== req.body.password) {
       throw new Error("Password confirmation does not match password");

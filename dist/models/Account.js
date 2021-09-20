@@ -29,8 +29,8 @@ var accountSchema = new Schema({
   },
   role: {
     type: String,
-    enum: ["ROLE_USER", "ROLE_ADMIN"],
-    required: true
+    default: 'ROLE_USER',
+    enum: ["ROLE_USER", "ROLE_ADMIN"]
   },
   accountVerifyToken: String,
   accountVerifyTokenExpiration: Date

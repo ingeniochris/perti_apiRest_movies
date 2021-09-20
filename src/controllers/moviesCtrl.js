@@ -10,6 +10,7 @@ import {
 } from "../services/Movies";
 
 export const searchMovies = async (req, res, next) => {
+  console.log(req.query)
   try {
     const allMov = await titleMovieService(req.query);
     if (!allMov) return res.json({ msg: "Title don´t match in Movies" });
